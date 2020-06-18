@@ -21,8 +21,18 @@ function* createPost(payload) {
   }
 }
 
+
+function* editPost(payload) {
+  const { id, title, body } = payload.data;
+  try {
+    yield axios.put(`${url}/posts/${id}`, { title, body });
+  } catch (error) {
+    console.log("Err:", error)
+  }
+  yield put({ type: "EDIT_POST_SUCCESS" });
+}
+
 function* deletePost(payload) {
-  console.log(":::", payload)
   const { id } = payload;
   try {
     yield axios.delete(`${url}/posts/${id}`);
@@ -35,7 +45,8 @@ function* deletePost(payload) {
 function* actionWatcher() {
   yield takeLatest('GET_LIST', getPosts),
   yield takeLatest('SEND_POST', createPost),
-  yield takeLatest('DELETE_POST', deletePost)
+  yield takeLatest('DELETE_POST', deletePost),
+  yield takeLatest('EDIT_POST_REQUEST', editPost)
 }
 export default function* rootSaga() {
    yield all([

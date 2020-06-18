@@ -16,6 +16,8 @@ import {
  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { useDispatch } from 'react-redux'
+import { deletePost, editPost, requestEditPost } from '../actions';
 
 function TransitionDown(props) {
   return <Slide {...props} direction="down" />;
@@ -29,15 +31,20 @@ const useStyles = makeStyles({
 const initialForm = { title: "", body: "" };
 const ListComponent = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [form, setForm] = useState(initialForm);
   const [message, setMessage] = useState("");
-  
+  const { form: stateForm } = useSelector(state => state);
+  if (stateForm.id != form.id){
+    setForm(stateForm);
+  }
   const handleCreate = () => {
     if (!form.title || !form.body) {
       setMessage("Invalid form");
       return;
     };
-    props.sendPost(form);
+    if (!form.id) props.sendPost(form)
+    else dispatch(requestEditPost(form))
     setForm(initialForm);
   }
   const handleClose = () => {
@@ -65,7 +72,7 @@ const ListComponent = (props) => {
           <Card className={classes.root}>
             <CardContent >
               <TextField 
-                onChange={e => setForm({...form, title: e.target.value})}
+                onChange={e => setForm({...form, title: e.target.value}) }
                 style={{width: "100%"}}
                 id="outlined-basic" 
                 label="Title" 
@@ -77,13 +84,13 @@ const ListComponent = (props) => {
                   multiline
                   rows={4}
                   value={form.body}
-                  onChange={e => setForm({...form, body: e.target.value})}
+                  onChange={e => setForm({...form, body: e.target.value}) }
                 />
             </CardContent>
             <CardActions>
               <Button onClick={() => handleCreate()}
                 style={{width: "100%"}} variant="outlined" color="primary" disableElevation>
-                Add new Post
+                { !form.id ? 'Add new Post' : 'Update Post' }
               </Button>
             </CardActions>
           </Card>
