@@ -11,10 +11,16 @@ const reducer = (state = { list: [] }, action) => {
       return { ...state, loading: true };
 
     case 'SEND_POST_SUCCESS':
+      const { id, title, body } = action;
       let { list }  = state;
-      list.unshift({id: Date.now(), title: "new", body: "newnew"});
+      list.unshift({ id, title, body });
       return { ...state, list, loading: false };
 
+    case 'DELETE_POST':
+      return { ...state, loading: true };
+
+    case 'DELETE_POST_SUCCESS':
+      return { ...state, list: state.list.filter(post => post.id != action.id), loading: false };
     default:
       return state;
    }
