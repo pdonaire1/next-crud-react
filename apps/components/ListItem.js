@@ -5,27 +5,20 @@ import {
   Fab,
   ListItem,
   ListItemText } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux'
-import { deletePost, editPost } from '../actions';
-const useStyles = makeStyles((theme) => ({
-  extendedIcon: {
-    minWidth: "55px",
-  },
-}));
+import { deletePost, editPost } from '../../redux/actions';
+
 
 const ListItemComponent = (props) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
   const { post } = props;
   return (<ListItem key={post.id}>
     <ListItemText primary={post.title} secondary={post.body} />
-    <Fab color="primary"  className={classes.extendedIcon}>
-      <EditIcon onClick={() => dispatch(editPost(post))} />
+    <Fab color="primary" style={{minWidth: "55px"}} >
+      <EditIcon onClick={() => props.editPost(post)} />
     </Fab>
     <span style={{padding: "2px"}}></span>
-    <Fab color="secondary"  className={classes.extendedIcon}>
-      <DeleteOutlinedIcon onClick={() => dispatch(deletePost(post.id))} />
+    <Fab color="secondary" style={{minWidth: "55px"}} >
+      <DeleteOutlinedIcon onClick={() => props.deletePost(post.id)} />
     </Fab>
   </ListItem>)
 };

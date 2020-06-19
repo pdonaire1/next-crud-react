@@ -1,23 +1,26 @@
+//Action Types
+import * as constants from '../constants';
+
 export const getList = () => ({
-  type: 'GET_LIST',
+  type: constants.GET_LIST,
 });
 
 export const sendPost = (data) => ({
-  type: 'SEND_POST',
+  type: constants.SEND_POST,
   data
 });
 
 export const deletePost = (id) => ({
-  type: 'DELETE_POST',
+  type: constants.DELETE_POST,
   id
 });
 
 export const editPost = (data) => ({
-  type: 'EDIT_POST',
+  type: constants.EDIT_POST,
   data
 });
 
 export const requestEditPost = (data) => ({
-  type: 'EDIT_POST_REQUEST',
+  type: constants.EDIT_POST_REQUEST,
   data
 });
