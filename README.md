@@ -1,6 +1,6 @@
-# Nextjs-React-Redux-Example
+# Nextjs-React-Redux-Sagas-Material
 
-A Simple Counter App made with next.js, react and redux. 
+A simple Post App created by @pdonaire1
 
 To run the app:
 
@@ -9,4 +9,4 @@ npm install
 npm run dev
 ```
 
-[Detailed Explanation](https://dev.to/waqasabbasi/server-side-rendered-app-with-next-js-react-and-redux-38gf)
+[Heroku App](https://crud-next-posts.herokuapp.com/)
