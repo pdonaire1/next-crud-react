@@ -53,7 +53,6 @@ class ListComponent extends React.Component {
     };
     if (!form.id) this.props.sendPost(form)
     else this.props.requestEditPost(form)
-    this.setState({ form: initialForm });
   }
   handleClear = () => {
     this.setState({ form: initialForm });
